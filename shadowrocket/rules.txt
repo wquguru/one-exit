@@ -1,0 +1,23 @@
+# 先加 HTTP 节点，备注 SG_Residential，填同一组地址、端口、用户名、密码。
+# 再新建策略组「家宽落地」，类型 Select，只包含这个节点。
+# 下面每行在规则列表最顶部添加：类型见第一列，策略选「家宽落地」。
+# 全局路由必须是「配置」。
+# 直连超时才给这个节点设「代理通过」，选订阅里一个固定节点，不要选自动测速组。
+
+DOMAIN-SUFFIX,claude.ai,家宽落地
+DOMAIN-SUFFIX,claude.com,家宽落地
+DOMAIN-SUFFIX,clau.de,家宽落地
+DOMAIN-SUFFIX,anthropic.com,家宽落地
+DOMAIN-SUFFIX,claudeusercontent.com,家宽落地
+DOMAIN-SUFFIX,modelcontextprotocol.io,家宽落地
+IP-CIDR,160.79.104.0/21,家宽落地,no-resolve
+IP-CIDR6,2607:6bc0::/48,家宽落地,no-resolve
+
+DOMAIN-SUFFIX,google.com,家宽落地
+DOMAIN-SUFFIX,googleapis.com,家宽落地
+DOMAIN-SUFFIX,gstatic.com,家宽落地
+DOMAIN-SUFFIX,gmail.com,家宽落地
+DOMAIN-SUFFIX,googleusercontent.com,家宽落地
+DOMAIN-SUFFIX,recaptcha.net,家宽落地
+
+DOMAIN-SUFFIX,webshare.io,家宽落地
