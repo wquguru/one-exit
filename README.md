@@ -28,7 +28,9 @@ Shadowrocket 没有这段正则。住宅节点建好后就设「代理通过」�
 
 覆写是一段 JavaScript，不是 Clash Party 那份 YAML。只粘贴、不在订阅上选中，不会生效。
 
-1. 工具 → 进阶配置 → 脚本 → 添加，把 `flclash/claude-google.js` 全文贴进去。
+1. 工具 → 进阶配置 → 脚本 → 添加，选择通过 URL 导入：
+
+   `https://raw.githubusercontent.com/wquguru/one-exit/main/flclash/claude-google.js`
 2. 配置 → 选中机场配置，点右侧配置按钮 → 覆写 → 脚本 → 选中刚添加的脚本。
 3. 回到仪表盘，重启连接。
 
