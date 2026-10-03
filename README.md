@@ -14,7 +14,7 @@ Shadowrocket 没有这段正则。住宅节点建好后就设「代理通过」�
 
 | 文件 | 用在 |
 | --- | --- |
-| `clash-party/override.yaml` | macOS Clash Party。写进覆写，不要改 `work/config.yaml`。 |
+| `clash-party/override.yaml` | macOS Clash Party。用链接导入覆写。 |
 | `flclash/claude-google.js` | 安卓 FlClash ≥ 0.8.85。Clash Party 那份 YAML 在 FlClash 里不会生效 |
 | `shadowrocket/one-exit.module` | iOS Shadowrocket。加成本地模块，规则指向节点名 `SG_Residential` |
 
@@ -22,7 +22,11 @@ Shadowrocket 没有这段正则。住宅节点建好后就设「代理通过」�
 
 ## Clash Party
 
-在覆写里新建一份本地 YAML，把 `clash-party/override.yaml` 贴进去。不要改 `work/config.yaml`。改完后在界面里刷新当前订阅。
+左侧「覆写」粘贴下面的链接导入，然后在本地把尖括号里的占位符改成你的代理信息：
+
+`https://raw.githubusercontent.com/wquguru/one-exit/main/clash-party/override.yaml`
+
+改完不要再更新这份覆写，更新会把账号盖回占位符。然后打开内核设置，点旋转按钮重启服务。
 
 ## FlClash
 
