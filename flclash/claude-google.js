@@ -3,15 +3,18 @@
 // 配置 → 选中机场 → 右侧配置 → 覆写 → 脚本 → 选中刚添加的脚本 → 仪表盘重启连接。
 // 不要把 Clash Party 的 +rules / proxies+: 贴进来。
 // 默认先经 Dialer-Res 再连住宅端口。出口 IP 仍是这条住宅代理。
-// 默认收台湾、日本、新加坡、美国、韩国，不含香港。
-// 节点名里没有这些地区时，改 FILTER，并把 FALLBACK 写成一个真实节点名，不要写 DIRECT。
+// 默认收台湾、日本、新加坡、美国、韩国，不含香港。测速只看本机到中转，不看中转到住宅。
+// 名字里没有这些地区的节点（例如 Fast、Balancer、TLS）不会进组。要收它们就放宽 FILTER。
+// 默认不写 empty-fallback。这一项只能填订阅里的节点名，不能填策略组名，也不能填 DIRECT。
+// 名字不存在时整份配置会被拒绝，哪怕组里已经有节点。订阅更新把节点改名后也会一起挂。
+// 节点名完全没有地区词、组会被滤空时，再给 Dialer-Res 加上 "empty-fallback"。
+// 不要把中转成员写成 US、JP 这类组名。各组机场的策略组名字不一样。
 // 回滚（中转入口全灭，并且接受 TLS 被掐）：删掉 Dialer-Res 那一组，dialer-proxy 改成 "DIRECT"。
 
 const main = (config) => {
   const LANDING = "SG_Residential";
   const DIALER = "Dialer-Res";
   const FILTER = "(?i)(台湾|台灣|日本|新加坡|美国|美國|韩国|韓國|\\b(TW|JP|SG|US|KR)\\b)";
-  const FALLBACK = "<一个真实节点名>";
 
   config.proxies = config.proxies || [];
   config.proxies.push({
@@ -37,7 +40,6 @@ const main = (config) => {
     "include-all": true,
     filter: FILTER,
     "exclude-filter": "(?i)倍率|IPv6|到期|剩余|官网|失联|故障|香港|\\bHK\\b",
-    "empty-fallback": FALLBACK,
   });
 
   const pin = [

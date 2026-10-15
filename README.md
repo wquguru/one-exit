@@ -4,7 +4,7 @@
 
 出口 IP 由这条住宅代理决定。本机先连订阅里的中转节点，再由中转去连住宅端口。直连时这一跳上的握手是明文，有的站点会在 TLS 开始后被掐断，同时 webshare 仍可能显示住宅 IP。
 
-Clash Party 和 FlClash 用隐藏的测速组 `Dialer-Res` 做中转。默认收台湾、日本、新加坡、美国、韩国，不含香港。测速组换的是中转，出口 IP 不变。节点名里没有这些地区时，再改 `filter`，并把 `empty-fallback` 写成一个真实节点名，不要写成 `DIRECT`。中转入口全部不可用时，按配置注释把 `dialer-proxy` 改回 `DIRECT`。
+Clash Party 和 FlClash 用隐藏的测速组 `Dialer-Res` 做中转。默认收台湾、日本、新加坡、美国、韩国，不含香港。测速组换的是中转，出口 IP 不变。测速只看本机到中转。名字里没有这些地区的节点不会进组，需要时再放宽 `filter`。默认不写 `empty-fallback`：写上的名字必须是订阅里的节点，不能是策略组名，也不能是 `DIRECT`；名字不存在时整份配置起不来。中转入口全部不可用时，按配置注释把 `dialer-proxy` 改回 `DIRECT`。
 
 Shadowrocket 没有这段正则。住宅节点建好后就设「代理通过」，指向一个固定节点，或指向你自己建的测速策略组。留空就是直连。
 
@@ -18,7 +18,7 @@ Shadowrocket 没有这段正则。住宅节点建好后就设「代理通过」�
 | `flclash/claude-google.js` | 安卓 FlClash ≥ 0.8.85。Clash Party 那份 YAML 在 FlClash 里不会生效 |
 | `shadowrocket/one-exit.module` | iOS Shadowrocket。加成本地模块，规则指向节点名 `SG_Residential` |
 
-把尖括号里的占位符换成你的代理信息。节点名里没有台湾、日本、新加坡、美国、韩国时，再改中转组的匹配和滤空节点名。
+把尖括号里的占位符换成你的代理信息。节点名里没有台湾、日本、新加坡、美国、韩国时，再改中转组的 `filter`。只有组会被滤空时，才填 `empty-fallback`。
 
 ## Clash Party
 

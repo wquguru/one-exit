@@ -1,8 +1,12 @@
 # Clash Party 覆写。可用 raw 链接导入，再在本地改占位符。不要再更新这份覆写。
 # 改完后在内核设置里点旋转按钮重启服务。
 # 默认先经 Dialer-Res 再连住宅端口。出口 IP 仍是这条住宅代理。
-# 默认收台湾、日本、新加坡、美国、韩国，不含香港。
-# 节点名里没有这些地区时，改 filter，并把 empty-fallback 写成一个真实节点名，不要写 DIRECT。
+# 默认收台湾、日本、新加坡、美国、韩国，不含香港。测速只看本机到中转，不看中转到住宅。
+# 名字里没有这些地区的节点（例如 Fast、Balancer、TLS）不会进组。要收它们就放宽 filter。
+# 默认不写 empty-fallback。这一项只能填订阅里的节点名，不能填策略组名，也不能填 DIRECT。
+# 名字不存在时整份配置会被拒绝，哪怕组里已经有节点。订阅更新把节点改名后也会一起挂。
+# 节点名完全没有地区词、组会被滤空时，再取消下面 empty-fallback 那一行的注释。
+# 不要把中转成员写成 US、JP 这类组名。各组机场的策略组名字不一样。
 # 回滚（中转入口全灭，并且接受 TLS 被掐）：删掉 proxy-groups 这段，dialer-proxy 改成 DIRECT。
 
 proxies+:
@@ -26,7 +30,7 @@ proxy-groups+:
     include-all: true
     filter: '(?i)(台湾|台灣|日本|新加坡|美国|美國|韩国|韓國|\b(TW|JP|SG|US|KR)\b)'
     exclude-filter: '(?i)倍率|IPv6|到期|剩余|官网|失联|故障|香港|\bHK\b'
-    empty-fallback: "<一个真实节点名>"
+    # empty-fallback: "<一个真实节点名>"
 
 +rules:
   - DOMAIN-SUFFIX,claude.ai,SG_Residential

@@ -60,8 +60,12 @@ def check_party():
     compile_filter("Dialer-Res filter", dialer.get("filter"))
     compile_filter("Dialer-Res exclude-filter", dialer.get("exclude-filter"))
     fallback = dialer.get("empty-fallback")
-    if not isinstance(fallback, str) or not fallback.strip() or fallback == "DIRECT":
-        fail("empty-fallback must be a node name, not DIRECT")
+    if fallback is not None and (
+        not isinstance(fallback, str)
+        or not fallback.strip()
+        or fallback in {"DIRECT", "<一个真实节点名>"}
+    ):
+        fail("empty-fallback must be omitted, or a real leaf node name")
 
     rules = doc.get("+rules")
     if not isinstance(rules, list) or not rules:
@@ -98,9 +102,8 @@ def check_flclash():
     if not exclude:
         fail("FlClash exclude-filter is missing")
     compile_filter("FlClash exclude-filter", exclude.group(1))
-    fallback = js_string(source, "FALLBACK")
-    if not fallback.strip() or fallback == "DIRECT":
-        fail("FlClash FALLBACK must be a node name, not DIRECT")
+    if re.search(r'"empty-fallback"\s*:', source):
+        fail("FlClash must omit empty-fallback until a real leaf node name is filled in")
 
 
 def check_shadowrocket():
