@@ -18,15 +18,28 @@ Shadowrocket 没有这段正则。住宅节点建好后就设「代理通过」�
 | `flclash/claude-google.js` | 安卓 FlClash ≥ 0.8.85。Clash Party 那份 YAML 在 FlClash 里不会生效 |
 | `shadowrocket/one-exit.module` | iOS Shadowrocket。加成本地模块，规则指向节点名 `SG_Residential` |
 
-把尖括号里的占位符换成你的代理信息。节点名里没有台湾、日本、新加坡、美国、韩国时，再改中转组的 `filter`。只有组会被滤空时，才填 `empty-fallback`。
+## 住宅 HTTP 代理
+
+Clash Party 和 FlClash 导入之后，住宅节点 `SG_Residential` 里仍是占位符。在本地把下面四项换成你的 HTTP 代理，三台设备用同一套：
+
+| 字段 | 模板里现在是 | 换成 |
+| --- | --- | --- |
+| `server` | `<HOST>` | 代理地址 |
+| `port` | `0` | 真实端口 |
+| `username` | `<USERNAME>` | 用户名 |
+| `password` | `<PASSWORD>` | 密码 |
+
+改完不要再从链接更新这两份覆写。更新会把这四项盖回占位符。
+
+Shadowrocket 的模块里没有这四项。地址、端口、用户名和密码写在首页那个 HTTP 节点上，备注必须是 `SG_Residential`。
 
 ## Clash Party
 
-左侧「覆写」粘贴下面的链接导入，然后在本地把尖括号里的占位符改成你的代理信息：
+左侧「覆写」粘贴下面的链接导入：
 
 `https://raw.githubusercontent.com/wquguru/one-exit/main/clash-party/override.yaml`
 
-改完不要再更新这份覆写，更新会把账号盖回占位符。然后打开内核设置，点旋转按钮重启服务。
+导入后按上一节改 `SG_Residential` 的地址、端口、用户名和密码。改完不要再更新这份覆写。然后打开内核设置，点旋转按钮重启服务。
 
 ## FlClash
 
@@ -35,14 +48,15 @@ Shadowrocket 没有这段正则。住宅节点建好后就设「代理通过」�
 1. 工具 → 进阶配置 → 脚本 → 添加，选择通过 URL 导入：
 
    `https://raw.githubusercontent.com/wquguru/one-exit/main/flclash/claude-google.js`
-2. 配置 → 选中机场配置，点右侧配置按钮 → 覆写 → 脚本 → 选中刚添加的脚本。
-3. 回到仪表盘，重启连接。
+2. 打开刚导入的脚本，按「住宅 HTTP 代理」改掉 `server`、`port`、`username`、`password`。`port` 现在是 `0`，必须改成真实端口。不要重新从 URL 导入，否则这四项会被盖回占位符。
+3. 配置 → 选中机场配置，点右侧配置按钮 → 覆写 → 脚本 → 选中刚添加的脚本。
+4. 回到仪表盘，重启连接。
 
 ## Shadowrocket
 
 不要改现有的懒人配置，也不要逐条点加规则。导出的配置里 `[Proxy]` 和 `[Proxy Group]` 是空的，节点在首页列表里；规则直接写节点备注。模块里的规则优先于配置文件，更新订阅不会把这几条冲掉。
 
-1. 首页添加节点，类型 HTTP。备注必须是 `SG_Residential`，和模块里的策略名一致。地址、端口、用户名、密码和另外两台用同一套。
+1. 首页添加节点，类型 HTTP。备注必须是 `SG_Residential`，和模块里的策略名一致。地址、端口、用户名、密码和另外两台用同一套。模块里没有这些字段。
 2. 点这个节点后面的 ⓘ，设置「代理通过」。选一个固定节点，或选一个测速分组。这一项写不进配置文件，留空就是从手机直连住宅端口。
 3. 底部「配置」→「模块」→ 右上角 ＋，粘贴下面的链接再下载：
 
