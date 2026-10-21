@@ -43,13 +43,30 @@ const main = (config) => {
   });
 
   const pin = [
+    // 住宅代理连 2607:6bc0 会 502。放在域名规则前面，拒绝 IPv6，让客户端改走 IPv4。
+    "IP-CIDR6,2607:6bc0::/48,REJECT,no-resolve",
+    "IP-CIDR6,2607:6bc0:11::/48,REJECT,no-resolve",
     "DOMAIN-SUFFIX,clau.de," + LANDING,
+    "DOMAIN-SUFFIX,claudemcpcontent.com," + LANDING,
     "DOMAIN-KEYWORD,anthropic," + LANDING,
     "DOMAIN-KEYWORD,claude," + LANDING,
     "DOMAIN-KEYWORD,modelcontextprotocol," + LANDING,
+    "DOMAIN-KEYWORD,browser-intake," + LANDING,
     "IP-CIDR,160.79.104.0/21," + LANDING + ",no-resolve",
-    "IP-CIDR6,2607:6bc0::/48," + LANDING + ",no-resolve",
     "IP-ASN,399358," + LANDING + ",no-resolve",
+    "DOMAIN-SUFFIX,sentry.io," + LANDING,
+    "DOMAIN-SUFFIX,datadoghq.com," + LANDING,
+    "DOMAIN-SUFFIX,growthbook.io," + LANDING,
+    "DOMAIN-SUFFIX,usefathom.com," + LANDING,
+    "DOMAIN-SUFFIX,hcaptcha.com," + LANDING,
+    "DOMAIN-SUFFIX,stripe.com," + LANDING,
+    "DOMAIN-SUFFIX,stripe.network," + LANDING,
+    "DOMAIN-SUFFIX,stripecdn.com," + LANDING,
+    "DOMAIN-SUFFIX,intercom.io," + LANDING,
+    "DOMAIN-SUFFIX,intercomcdn.com," + LANDING,
+    "DOMAIN-SUFFIX,challenges.cloudflare.com," + LANDING,
+    "DOMAIN-SUFFIX,siftscience.com," + LANDING,
+    "DOMAIN-SUFFIX,segment.io," + LANDING,
     "PROCESS-NAME,com.anthropic.claude," + LANDING,
     "DOMAIN-SUFFIX,webshare.io," + LANDING,
 

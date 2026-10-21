@@ -2,14 +2,34 @@
 #!desc=Claude、Google、Persona 走备注为 SG_Residential 的住宅节点
 
 [Rule]
+# 住宅代理连 2607:6bc0 会 502。这两条放在域名规则前面，拒绝 IPv6，让客户端改走 IPv4。
+IP-CIDR6,2607:6bc0::/48,REJECT,no-resolve
+IP-CIDR6,2607:6bc0:11::/48,REJECT,no-resolve
 DOMAIN-SUFFIX,claude.ai,SG_Residential
 DOMAIN-SUFFIX,claude.com,SG_Residential
 DOMAIN-SUFFIX,clau.de,SG_Residential
 DOMAIN-SUFFIX,anthropic.com,SG_Residential
 DOMAIN-SUFFIX,claudeusercontent.com,SG_Residential
+DOMAIN-SUFFIX,claudemcpcontent.com,SG_Residential
 DOMAIN-SUFFIX,modelcontextprotocol.io,SG_Residential
+DOMAIN-KEYWORD,anthropic,SG_Residential
+DOMAIN-KEYWORD,claude,SG_Residential
 IP-CIDR,160.79.104.0/21,SG_Residential,no-resolve
-IP-CIDR6,2607:6bc0::/48,SG_Residential,no-resolve
+IP-ASN,399358,SG_Residential,no-resolve
+DOMAIN-SUFFIX,sentry.io,SG_Residential
+DOMAIN-KEYWORD,browser-intake,SG_Residential
+DOMAIN-SUFFIX,datadoghq.com,SG_Residential
+DOMAIN-SUFFIX,growthbook.io,SG_Residential
+DOMAIN-SUFFIX,usefathom.com,SG_Residential
+DOMAIN-SUFFIX,hcaptcha.com,SG_Residential
+DOMAIN-SUFFIX,stripe.com,SG_Residential
+DOMAIN-SUFFIX,stripe.network,SG_Residential
+DOMAIN-SUFFIX,stripecdn.com,SG_Residential
+DOMAIN-SUFFIX,intercom.io,SG_Residential
+DOMAIN-SUFFIX,intercomcdn.com,SG_Residential
+DOMAIN-SUFFIX,challenges.cloudflare.com,SG_Residential
+DOMAIN-SUFFIX,siftscience.com,SG_Residential
+DOMAIN-SUFFIX,segment.io,SG_Residential
 
 DOMAIN-SUFFIX,google.com,SG_Residential
 DOMAIN-SUFFIX,googleapis.com,SG_Residential

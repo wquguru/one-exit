@@ -81,6 +81,10 @@ def check_rule(rule, policy):
     if len(parts) < 3 or parts[0] not in RULE_TYPES:
         fail(f"unrecognized rule: {rule}")
     target = parts[2]
+    if parts[0] == "IP-CIDR6":
+        if target != "REJECT":
+            fail(f"IPv6 rule must REJECT, not {target}: {rule}")
+        return
     if target != policy:
         fail(f"rule policy is {target}, expected {policy}: {rule}")
 
