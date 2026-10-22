@@ -79,6 +79,28 @@ const main = (config) => {
     "DOMAIN-SUFFIX,withpersona.com," + LANDING,
     "PROCESS-NAME,com.android.vending," + LANDING,
     "PROCESS-NAME,com.google.android.apps.walletnfcrel," + LANDING,
+
+    // 相关功能统一走住宅出口；用途和网络核对见 docs/service-domains.md。
+    // 同一域名上的其他软件流量也会走住宅出口。
+
+    // Claude Code 更新说明下载。
+    "DOMAIN,raw.githubusercontent.com," + LANDING,
+
+    // GitHub 授权、插件/插件市场下载，以及仓库、PR 等 API 请求。
+    "DOMAIN,github.com," + LANDING,
+    "DOMAIN,api.github.com," + LANDING,
+
+    // Google CDN：包括 Linux 拼写字典下载及其 gvt1.com 子域名跳转。
+    "DOMAIN-SUFFIX,gvt1.com," + LANDING,
+
+    // 图表、预览或网页内容引用的第三方程序库和模块。
+    "DOMAIN,cdnjs.cloudflare.com," + LANDING,
+    "DOMAIN,cdn.jsdelivr.net," + LANDING,
+    "DOMAIN,esm.sh," + LANDING,
+    "DOMAIN,unpkg.com," + LANDING,
+
+    // Microsoft Entra 登录，例如 Foundry 使用 Entra 身份验证时。
+    "DOMAIN,login.microsoftonline.com," + LANDING,
   ];
   config.rules = pin.concat(config.rules || []);
   return config;

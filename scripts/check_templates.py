@@ -10,6 +10,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = "SG_Residential"
 RULE_TYPES = {
+    "DOMAIN",
     "DOMAIN-SUFFIX",
     "DOMAIN-KEYWORD",
     "IP-CIDR",

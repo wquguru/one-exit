@@ -1,6 +1,6 @@
 # one-exit
 
-三份模板，让 Claude、Google（含 Gmail、Google Pay）、Persona、Stripe、人机验证，以及 Sentry、Datadog、Sift、Segment 走同一条静态住宅代理。Anthropic 的 IPv6 段直接拒绝，避免住宅代理对 `2607:6bc0` 返回 502。
+三份模板，让 Claude、Google（含 Gmail、Google Pay）、Persona、Stripe、人机验证，以及 Sentry、Datadog、Sift、Segment 走同一条静态住宅代理。Claude Code 更新说明、GitHub、常用网页资源 CDN 和 Microsoft Entra 登录的相关域名也使用这个出口。Anthropic 的 IPv6 段直接拒绝，避免住宅代理对 `2607:6bc0` 返回 502。
 
 出口 IP 由这条住宅代理决定。本机先连订阅里的中转节点，再由中转去连住宅端口。直连时这一跳上的握手是明文，有的站点会在 TLS 开始后被掐断，同时 webshare 仍可能显示住宅 IP。
 
@@ -17,6 +17,8 @@ Shadowrocket 没有这段正则。住宅节点建好后就设「代理通过」�
 | `clash-party/override.yaml` | macOS Clash Party。用链接导入覆写。 |
 | `flclash/claude-google.js` | 安卓 FlClash ≥ 0.8.85。Clash Party 那份 YAML 在 FlClash 里不会生效 |
 | `shadowrocket/one-exit.module` | iOS Shadowrocket。加成本地模块，规则指向节点名 `SG_Residential` |
+
+三份模板均默认包含上述功能域名的分流规则。各域名的用途、触发请求的功能，以及 Linux、Cowork、DNS、UDP 核对方法，见[服务域名与网络核对](docs/service-domains.md)。这些规则也会影响其他应用访问同一域名的流量。
 
 ## 住宅 HTTP 代理
 
